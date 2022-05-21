@@ -52,6 +52,8 @@
 
 			let room;
 
+			let checkPlay = false;
+
 			let controller, controllerGrip;
 			let INTERSECTED;
 
@@ -73,7 +75,6 @@
 			animate();
 
 			function init() {
-				audioElement.play();
 
 				container = document.createElement( 'div' );
 				document.body.appendChild( container );
@@ -232,9 +233,14 @@
 
 			function render() {
 
+				if (checkPlay == false) {
+					checkPlay = true; 
+					audioElement.play();
+				}
+
 				analyzer.getByteFrequencyData(data);
 
-				sphere.scale.set(data[10]/500,data[10]/500,data[10]/500); 
+				sphere.scale.set(0.5+data[10]/500,0.5+data[10]/500,0.5+data[10]/500); 
 
 				const delta = clock.getDelta() * 60;
 
