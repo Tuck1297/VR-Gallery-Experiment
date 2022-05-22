@@ -416,20 +416,20 @@
                                             dolly.position.z += cameraVector.x * speedFactor[i] * data.axes[2];
 
                                             //provide haptic feedback if available in browser
-                                            if (
-                                                source.gamepad.hapticActuators &&
-                                                source.gamepad.hapticActuators[0]
-                                            ) {
-                                                var pulseStrength = Math.abs(data.axes[2]) + Math.abs(data.axes[3]);
-                                                if (pulseStrength > 0.75) {
-                                                    pulseStrength = 0.75;
-                                                }
-
-                                                var didPulse = source.gamepad.hapticActuators[0].pulse(
-                                                    pulseStrength,
-                                                    100
-                                                );
-                                            }
+                                            // if (
+                                                // source.gamepad.hapticActuators &&
+                                                // source.gamepad.hapticActuators[0]
+                                            // ) {
+                                                // var pulseStrength = Math.abs(data.axes[2]) + Math.abs(data.axes[3]);
+                                                // if (pulseStrength > 0.75) {
+                                                    // pulseStrength = 0.75;
+                                                // }
+// 
+                                                // var didPulse = source.gamepad.hapticActuators[0].pulse(
+                                                    // pulseStrength,
+                                                    // 100
+                                                // );
+                                            // }
                                         } else {
                                             // (data.axes[2] > 0) ? console.log('left on right thumbstick') : console.log('right on right thumbstick')
                                             dolly.rotateY(-THREE.Math.degToRad(data.axes[2]));
@@ -443,38 +443,38 @@
                                             // (data.axes[3] > 0) ? console.log('up on left thumbstick') : console.log('down on left thumbstick')
                                             dolly.position.y -= speedFactor[i] * data.axes[3];
                                             //provide haptic feedback if available in browser
-                                            if (
-                                                source.gamepad.hapticActuators &&
-                                                source.gamepad.hapticActuators[0]
-                                            ) {
-                                                var pulseStrength = Math.abs(data.axes[3]);
-                                                if (pulseStrength > 0.75) {
-                                                    pulseStrength = 0.75;
-                                                }
-                                                var didPulse = source.gamepad.hapticActuators[0].pulse(
-                                                    pulseStrength,
-                                                    100
-                                                );
-                                            }
+                                            // if (
+                                                // source.gamepad.hapticActuators &&
+                                                // source.gamepad.hapticActuators[0]
+                                            // ) {
+                                                // var pulseStrength = Math.abs(data.axes[3]);
+                                                // if (pulseStrength > 0.75) {
+                                                    // pulseStrength = 0.75;
+                                                // }
+                                                // var didPulse = source.gamepad.hapticActuators[0].pulse(
+                                                    // pulseStrength,
+                                                    // 100
+                                                // );
+                                            // }
                                         } else {
                                             // (data.axes[3] > 0) ? console.log('up on right thumbstick') : console.log('down on right thumbstick')
                                             dolly.position.x -= cameraVector.x * speedFactor[i] * data.axes[3];
                                             dolly.position.z -= cameraVector.z * speedFactor[i] * data.axes[3];
 
                                             //provide haptic feedback if available in browser
-                                            if (
-                                                source.gamepad.hapticActuators &&
-                                                source.gamepad.hapticActuators[0]
-                                            ) {
-                                                var pulseStrength = Math.abs(data.axes[2]) + Math.abs(data.axes[3]);
-                                                if (pulseStrength > 0.75) {
-                                                    pulseStrength = 0.75;
-                                                }
-                                                var didPulse = source.gamepad.hapticActuators[0].pulse(
-                                                    pulseStrength,
-                                                    100
-                                                );
-                                            }
+                                            // if (
+                                                // source.gamepad.hapticActuators &&
+                                                // source.gamepad.hapticActuators[0]
+                                            // ) {
+                                                // var pulseStrength = Math.abs(data.axes[2]) + Math.abs(data.axes[3]);
+                                                // if (pulseStrength > 0.75) {
+                                                    // pulseStrength = 0.75;
+                                                // }
+                                                // var didPulse = source.gamepad.hapticActuators[0].pulse(
+                                                    // pulseStrength,
+                                                    // 100
+                                                // );
+                                            // }
                                         }
                                         controls.update();
                                     }
