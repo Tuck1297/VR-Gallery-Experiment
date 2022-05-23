@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Lecture 3.7</title>
+    <title>Gallery Experiment</title>
     <meta charset="utf-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> -->
     <!-- favicon -->
@@ -54,7 +54,7 @@
         var dolly;
         var cameraVector = new THREE.Vector3(); // create once and reuse it!
         const prevGamePads = new Map();
-        var speedFactor = [0.2, 0.2, 0.2, 0.2];
+        var speedFactor = [1.2, 1.2, 1.2, 1.2];
 
         ////
         //////////////////////////////////////////
@@ -222,7 +222,7 @@
             const photoMaterial8 = new THREE.MeshLambertMaterial({
                 side:THREE.DoubleSide, 
                 // color: 'green'
-                map: imageloader.load('./Media/phone images-5.jpg')
+                map: imageloader.load('./Media/Tettegouche State Park Lake Superior Shore Summer 2021-min.jpg')
             });  
             const image8Mesh = new THREE.Mesh(photoGeometry, photoMaterial8);
             image8Mesh.position.set(-49.95,7,25);
