@@ -31,6 +31,7 @@
         import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.119.1/examples/jsm/controls/OrbitControls.min.js";
         import { VRButton } from "https://cdn.jsdelivr.net/npm/three@0.119.1/examples/jsm/webxr/VRButton.min.js";
         import { XRControllerModelFactory } from "https://cdn.jsdelivr.net/npm/three@0.119.1/examples/jsm/webxr/XRControllerModelFactory.min.js";
+        import { FBXLoader } from 'https://cdn.jsdelivr.net/npm/three@0.119.1/examples/jsm/loaders/FBXLoader.js';
 
         var container;
         var camera, scene, renderer;
@@ -61,6 +62,9 @@
         animate();
 
         function init() {
+
+            let imageloader = new THREE.TextureLoader(); 
+
             container = document.createElement("div");
             document.body.appendChild(container);
 
@@ -71,7 +75,7 @@
                 50,
                 window.innerWidth / window.innerHeight,
                 0.1,
-                500  //MODIFIED FOR LARGER SCENE
+                1000  //MODIFIED FOR LARGER SCENE
             );
             camera.position.set(0, 1.6, 3);
 
@@ -81,14 +85,192 @@
 
             var geometry = new THREE.PlaneBufferGeometry(100, 100);
             var material = new THREE.MeshStandardMaterial({
-                color: 0xeeeeee,
-                roughness: 1.0,
-                metalness: 0.0
+                color: 0x999999,
+                roughness: 0.0,
+                metalness: 0.0, 
+                map: imageloader.load('./Media/tile-floor-3.jpg') 
             });
             var floor = new THREE.Mesh(geometry, material);
             floor.rotation.x = -Math.PI / 2;
             floor.receiveShadow = true;
             scene.add(floor);
+
+            const skyGeometry = new THREE.PlaneBufferGeometry(200,200);
+            const skyMaterial = new THREE.MeshStandardMaterial({
+                color: 0x0000ff, 
+                roughness:0.0, 
+                metalness: 0.0, 
+                side: THREE.DoubleSide, 
+                map: imageloader.load('./Media/Overhead Milky Way Photo from Yellowstone Summer 2021.jpg') 
+            }); 
+            let sky = new THREE.Mesh(skyGeometry, skyMaterial);
+            sky.position.y = 20;
+            sky.rotation.x = 4.701
+            // scene.add(sky);
+
+
+            const planeGeometry = new THREE.PlaneGeometry(100,20);
+            const planeMaterial = new THREE.MeshLambertMaterial({
+                side: THREE.DoubleSide,
+                map: imageloader.load('./Media/tile-floor.jpg') 
+            }); 
+            const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+            plane.position.set(0,10,-50); 
+            scene.add(plane)
+
+            const plane2 = new THREE.Mesh(planeGeometry, planeMaterial); 
+            plane2.position.set(0,10,50);
+            scene.add(plane2); 
+
+            const plane3 = new THREE.Mesh(planeGeometry, planeMaterial); 
+            plane3.position.set(50,10,0); 
+            plane3.rotation.y = 4.712; 
+            scene.add(plane3);
+
+            const plane4 = new THREE.Mesh(planeGeometry, planeMaterial);
+            plane4.position.set(-50,10,0);
+            plane4.rotation.y = 4.712;
+            scene.add(plane4); 
+
+            const cubeGeometry = new THREE.BoxGeometry(5,5,5);
+            for (let i = 0; i < 20; i++) {
+                for (let j = 0; j < 20; j++) {
+                    const cubeMaterial = new THREE.MeshBasicMaterial({color: Math.random()*0x0000ff});
+                    const box = new THREE.Mesh(cubeGeometry, cubeMaterial);
+                    box.position.set(-47.5+j*5,18+Math.random()*3,-47.5+i*5);
+                    scene.add(box);  
+                }  
+            } 
+
+            // pictures
+
+            const photoGeometry =  new THREE.PlaneGeometry(12,8);
+
+            // three facing upon launch
+            const photoMaterial1 = new THREE.MeshLambertMaterial({
+                side:THREE.DoubleSide, 
+                // color: 'green'
+                // map: imageloader.load('./Media/Overhead Milky Way Photo from Yellowstone Summer 2021-2.jpg')
+                map: imageloader.load('./Media/2021-17-min.jpg')
+            });  
+            const image1Mesh = new THREE.Mesh(photoGeometry,photoMaterial1);
+            image1Mesh.position.set(0,7,-49.95); 
+            scene.add(image1Mesh); 
+
+
+            const photoMaterial2 = new THREE.MeshLambertMaterial({
+                side:THREE.DoubleSide, 
+                // color: 'green'
+                map: imageloader.load('./Media/2020-121-min.jpg')
+            });  
+            const image2Mesh = new THREE.Mesh(photoGeometry, photoMaterial2);
+            image2Mesh.position.set(25,7,-49.95);
+            scene.add(image2Mesh); 
+
+            const photoMaterial3 = new THREE.MeshLambertMaterial({
+                side:THREE.DoubleSide, 
+                // color: 'green'
+                map: imageloader.load('./Media/2021 August Yellowstone Trip-10-min.jpg')
+            });  
+            const image3Mesh = new THREE.Mesh(photoGeometry, photoMaterial3);
+            image3Mesh.position.set(-25,7,-49.95);
+            scene.add(image3Mesh);
+
+            // three directly behind
+
+            const photoMaterial4 = new THREE.MeshLambertMaterial({
+                side:THREE.DoubleSide, 
+                // color: 'green'
+                map: imageloader.load('./Media/2021-22-min.jpg')
+            });  
+            const image4Mesh = new THREE.Mesh(photoGeometry,photoMaterial4);
+            image4Mesh.position.set(0,7,49.95); 
+            scene.add(image4Mesh); 
+
+
+            const photoMaterial5 = new THREE.MeshLambertMaterial({
+                side:THREE.DoubleSide, 
+                // color: 'green'
+                map: imageloader.load('./Media/Custer State Park 2019 Summer Trip-min.jpg')
+            });  
+            const image5Mesh = new THREE.Mesh(photoGeometry, photoMaterial5);
+            image5Mesh.position.set(25,7,49.95);
+            scene.add(image5Mesh); 
+
+            const photoMaterial6 = new THREE.MeshLambertMaterial({
+                side:THREE.DoubleSide, 
+                // color: 'green'
+                map: imageloader.load('./Media/Matrix Light 2021-min.jpg')
+            });  
+            const image6Mesh = new THREE.Mesh(photoGeometry, photoMaterial6);
+            image6Mesh.position.set(-25,7,49.95);
+            scene.add(image6Mesh);
+
+            // three to the left
+
+            const photoMaterial7 = new THREE.MeshLambertMaterial({
+                side:THREE.DoubleSide, 
+                // color: 'green'
+                map: imageloader.load('./Media/Mt. Rushmore National Memorial 2020 Summer-min.jpg')
+            });  
+            const image7Mesh = new THREE.Mesh(photoGeometry,photoMaterial7);
+            image7Mesh.position.set(-49.95,7,0);
+            image7Mesh.rotation.y = -4.712; 
+            scene.add(image7Mesh); 
+
+
+            const photoMaterial8 = new THREE.MeshLambertMaterial({
+                side:THREE.DoubleSide, 
+                // color: 'green'
+                map: imageloader.load('./Media/phone images-5.jpg')
+            });  
+            const image8Mesh = new THREE.Mesh(photoGeometry, photoMaterial8);
+            image8Mesh.position.set(-49.95,7,25);
+            image8Mesh.rotation.y = -4.712
+            scene.add(image8Mesh); 
+
+            const photoMaterial9 = new THREE.MeshLambertMaterial({
+                side:THREE.DoubleSide, 
+                // color: 'green'
+                map: imageloader.load('./Media/Wildflower North Shore Duluth Summer 2021-1-min.jpg')
+            });  
+            const image9Mesh = new THREE.Mesh(photoGeometry, photoMaterial9);
+            image9Mesh.position.set(-49.95,7,-25);
+            image9Mesh.rotation.y = -4.712;
+            scene.add(image9Mesh);
+
+            // three to the right
+            
+            const photoMaterial10 = new THREE.MeshLambertMaterial({
+                side:THREE.DoubleSide, 
+                // color: 'green'
+                map: imageloader.load('./Media/Yellowstone Grant Village Campground Summer 2021 MilkyWay-1.jpg')
+            });  
+            const image10Mesh = new THREE.Mesh(photoGeometry,photoMaterial10);
+            image10Mesh.position.set(49.95,7,0);
+            image10Mesh.rotation.y = 4.712; 
+            scene.add(image10Mesh); 
+
+
+            const photoMaterial11 = new THREE.MeshLambertMaterial({
+                side:THREE.DoubleSide, 
+                // color: 'green'
+                map: imageloader.load('./Media/Willow River State Park 2020 Summer-min.jpg')
+            });  
+            const image11Mesh = new THREE.Mesh(photoGeometry, photoMaterial11);
+            image11Mesh.position.set(49.95,7,-25);
+            image11Mesh.rotation.y = 4.712;
+            scene.add(image11Mesh); 
+
+            const photoMaterial12 = new THREE.MeshLambertMaterial({
+                side:THREE.DoubleSide, 
+                // color: 'green'
+                map: imageloader.load('./Media/Gooseberry Falls Summer 2021-1-min.jpg')
+            });  
+            const image12Mesh = new THREE.Mesh(photoGeometry, photoMaterial12);
+            image12Mesh.position.set(49.95,7,25);
+            image12Mesh.rotation.y = 4.712;
+            scene.add(image12Mesh);
 
             scene.add(new THREE.HemisphereLight(0x808080, 0x606060));
 
@@ -105,40 +287,7 @@
             group = new THREE.Group();
             scene.add(group);
 
-            var geometries = [
-                new THREE.BoxBufferGeometry(0.2, 0.2, 0.2),
-                new THREE.ConeBufferGeometry(0.2, 0.2, 64),
-                new THREE.CylinderBufferGeometry(0.2, 0.2, 0.2, 64),
-                new THREE.IcosahedronBufferGeometry(0.2, 3),
-                new THREE.TorusBufferGeometry(0.2, 0.04, 64, 32)
-            ];
-
-            for (var i = 0; i < 100; i++) {
-                var geometry = geometries[Math.floor(Math.random() * geometries.length)];
-                var material = new THREE.MeshStandardMaterial({
-                    color: Math.random() * 0xffffff,
-                    roughness: 0.7,
-                    side: THREE.DoubleSide,   // MODIFIED TO DoubleSide
-                    metalness: 0.0
-                });
-
-                var object = new THREE.Mesh(geometry, material);
-
-                object.position.x = Math.random() * 200 - 100;  // MODIFIED FOR LARGER SCENE
-                object.position.y = Math.random() * 100;        // MODIFIED FOR LARGER SCENE
-                object.position.z = Math.random() * 200 - 100;  // MODIFIED FOR LARGER SCENE
-
-                object.rotation.x = Math.random() * 2 * Math.PI;
-                object.rotation.y = Math.random() * 2 * Math.PI;
-                object.rotation.z = Math.random() * 2 * Math.PI;
-
-                object.scale.setScalar(Math.random() * 20 + 0.5);  // MODIFIED FOR LARGER SCENE
-
-                object.castShadow = true;
-                object.receiveShadow = true;
-
-                group.add(object);
-            }
+            
 
             // renderer
             renderer = new THREE.WebGLRenderer({ antialias: true });
