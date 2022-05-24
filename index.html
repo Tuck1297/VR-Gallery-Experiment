@@ -4,6 +4,7 @@
 <head>
     <title>Gallery Experiment</title>
     <meta charset="utf-8">
+    <audio loop id="music" src="./Media/wings-of-liberty-21761.mp3"></audio>
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> -->
     <!-- favicon -->
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> -->
@@ -44,6 +45,8 @@
 
         var controls, group;
 
+        let audioElement = document.getElementById("music"); 
+
         ////////////////////////////////////////
         //// MODIFICATIONS FROM THREEJS EXAMPLE
         //// a camera dolly to move camera within webXR
@@ -54,7 +57,7 @@
         var dolly;
         var cameraVector = new THREE.Vector3(); // create once and reuse it!
         const prevGamePads = new Map();
-        var speedFactor = [1.2, 1.2, 1.2, 1.2];
+        var speedFactor = [2.0, 2.0, 2.0, 2.0];
 
         ////
         //////////////////////////////////////////
@@ -62,6 +65,8 @@
         animate();
 
         function init() {
+
+            audioElement.play(); 
 
             let imageloader = new THREE.TextureLoader(); 
 
@@ -77,10 +82,10 @@
                 0.1,
                 1000  //MODIFIED FOR LARGER SCENE
             );
-            camera.position.set(0, 1.6, 3);
+            camera.position.set(0, 2.6, 3);
 
             controls = new OrbitControls(camera, container);
-            controls.target.set(0, 1.6, 0);
+            controls.target.set(0, 2.6, 0);
             controls.update();
 
             var geometry = new THREE.PlaneBufferGeometry(100, 100);
